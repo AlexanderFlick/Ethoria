@@ -1,0 +1,23 @@
+﻿@using Game.Models
+@using Game.Services
+@inject IResourceService rs
+@inject GameState Game
+
+<div>
+    <p>@resource.name</p>
+    <button class="btn btn-primary" @onclick="() => AddResource()">Gather</button>
+</div>
+
+@code {
+    [Parameter]
+    public Resource resource { get; set; }
+
+    [Parameter]
+    public Chest chest { get; set; }
+
+    public void AddResource()
+    {
+        rs.AddToChest(chest, resource);
+        Game.OnStateChanged();
+    }
+}

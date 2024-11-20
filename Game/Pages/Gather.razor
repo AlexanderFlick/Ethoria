@@ -1,0 +1,19 @@
+﻿@page "/gather"
+@using Game.Components.Gather
+@inject GameState Game
+
+<div>
+    <h3>Resources</h3>
+    <p>Chest: @Game.Player.Chest.Contents.Count/@Game.Player.Chest.ItemMax</p>
+    @foreach(var resource in Game.Player.UnlockedResources)
+    {
+        <GatherResource resource="resource" chest="Game.Player.Chest" />
+    }
+</div>
+
+@code{
+    protected override void OnInitialized()
+    {
+        Game.OnStateChanged = StateHasChanged;
+    }
+}
