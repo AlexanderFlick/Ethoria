@@ -6,6 +6,11 @@ public class GameState
 {
     public Player Player { get; set; } = new Player();
     public Action OnStateChanged { get; set; }
+
+    public void NotifyStateChanged()
+    {
+        OnStateChanged?.Invoke();
+    }
 }
 
 public class Player

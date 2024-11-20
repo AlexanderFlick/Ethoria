@@ -3,19 +3,11 @@
 @using Game.Components.Player
 @inject GameState Game
 
-<div>
+<div style="text-align:center;">
     <h3>Resources</h3>
-    <p>Chest: @Game.Player.Chest.Contents.Count/@Game.Player.Chest.ItemMax</p>
     @foreach(var resource in Game.Player.UnlockedResources)
     {
         <GatherResource resource="resource" chest="Game.Player.Chest" />
     }
     <ChestSummary />
 </div>
-
-@code{
-    protected override void OnInitialized()
-    {
-        Game.OnStateChanged = StateHasChanged;
-    }
-}

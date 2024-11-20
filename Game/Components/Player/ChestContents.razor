@@ -37,7 +37,7 @@
             <p>No items in Chest.</p>
         </div>
     }
-    
+
 </div>
 
 @code {
@@ -47,13 +47,14 @@
 
     protected override void OnInitialized()
     {
-        Game.OnStateChanged = () =>
-        {
-            UpdateItemSummaries();
-            StateHasChanged();
-        };
-
+        Game.OnStateChanged += OnGameStateChanged;
         UpdateItemSummaries();
+    }
+
+    private void OnGameStateChanged()
+    {
+        UpdateItemSummaries();
+        InvokeAsync(StateHasChanged);
     }
 
     private void UpdateItemSummaries()

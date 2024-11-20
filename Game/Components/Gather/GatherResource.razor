@@ -3,7 +3,7 @@
 @inject IResourceService rs
 @inject GameState Game
 
-<div>
+<div class="card" style="padding:20px; margin-top:40px; text-align:center;">
     <p>@resource.name</p>
     <button class="btn btn-primary" @onclick="() => AddResource()">Gather</button>
 </div>
@@ -18,6 +18,6 @@
     public void AddResource()
     {
         rs.AddToChest(chest, resource);
-        Game.OnStateChanged();
+        Game.NotifyStateChanged();
     }
 }

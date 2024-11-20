@@ -1,11 +1,30 @@
 ﻿@inject GameState Game
 
-<div class="card" style="padding:20px; margin-top:40px; text-align:center;">
+<div>
     <h4>Chest</h4>
-    <p>@Game.Player.Chest.Contents.Count/@Game.Player.Chest.ItemMax Max Resources</p>
+    <p>@ChestItemCount/@ChestItemMax Max Resources</p>
     <ChestContents />
 </div>
 
 @code {
+    private int ChestItemCount { get; set; }
+    private int ChestItemMax { get; set; }
 
+    protected override void OnInitialized()
+    {
+        Game.OnStateChanged += OnGameStateChanged;
+        UpdateChestDetails();
+    }
+
+    private void OnGameStateChanged()
+    {
+        UpdateChestDetails();
+        InvokeAsync(StateHasChanged);
+    }
+
+    private void UpdateChestDetails()
+    {
+        ChestItemCount = Game.Player.Chest.Contents.Count;
+        ChestItemMax = Game.Player.Chest.ItemMax;
+    }
 }
