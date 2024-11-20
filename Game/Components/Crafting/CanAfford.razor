@@ -1,0 +1,23 @@
+﻿@inject NavigationManager Nav
+
+<div>
+    @if(CanAffordRecipe)
+    {
+        <p>Can afford recipe!</p>
+    }
+
+    @if(!CanAffordRecipe)
+    {
+        <p>Cannot afford recipe yet!</p>
+        <button @onclick="NavigateToResources">Gather More Resources</button>
+    }
+</div>
+
+@code {
+    private bool CanAffordRecipe { get; set; }
+
+    private void NavigateToResources()
+    {
+        Nav.NavigateTo("/gather");
+    }
+}

@@ -5,6 +5,7 @@ namespace Game.Services;
 public interface IResourceService
 {
     void AddToChest(Chest chest, Resource resource);
+    void RemoveResourcesFromChest(Chest chest, List<Resource> resourcesToRemove);
 }
 
 public class ResourceService : IResourceService
@@ -15,5 +16,13 @@ public class ResourceService : IResourceService
             return;
 
         chest.Contents.Add(resource);
+    }
+
+    public void RemoveResourcesFromChest(Chest chest, List<Resource> resourcesToRemove)
+    {
+        foreach (var resource in resourcesToRemove) 
+        {
+            chest.Contents.Remove(resource);
+        }
     }
 }

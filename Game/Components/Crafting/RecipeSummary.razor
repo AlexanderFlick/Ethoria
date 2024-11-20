@@ -1,0 +1,20 @@
+﻿@using Game.Models
+@using Game.Services
+@inject IRecipeService RecipeService
+@inject GameState Game
+
+<div class="card" style="padding:20px; margin-top:40px; text-align:center;">
+    <p>@Recipe.Name</p>
+    <RecipeCost Recipe="Recipe" />
+    <button class="btn btn-primary" @onclick="() => Craft(Recipe)">Craft</button>
+</div>
+
+@code {
+    [Parameter]
+    public Recipe Recipe { get; set; }
+
+    private void Craft(Recipe recipe)
+    {
+        RecipeService.Create(Game.Player.Chest, recipe.Ingredients);
+    }
+}

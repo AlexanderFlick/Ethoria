@@ -1,0 +1,27 @@
+﻿@using Game.Models
+
+<div>
+    @foreach(var cost in RecipeCosts)
+    {
+        <p>@cost.Resource.Name: @cost.Total</p>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public Recipe Recipe { get; set; }
+
+    private List<ContentSummary> RecipeCosts { get; set; }
+
+    protected override void OnInitialized()
+    {
+        RecipeCosts = Recipe.Ingredients
+        .GroupBy(ingredient => ingredient.Name)
+        .Select(group => new ContentSummary
+            {
+                Resource = group.First(),
+                Total = group.Count()
+            }).
+        ToList();
+    }
+}

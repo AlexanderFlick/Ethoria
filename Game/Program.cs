@@ -10,6 +10,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddTransient<IResourceService, ResourceService>();
 builder.Services.AddTransient<IAreaService, AreaService>();
+builder.Services.AddTransient<IRecipeService, RecipeService>();
 builder.Services.AddSingleton<GameState>();
 
 

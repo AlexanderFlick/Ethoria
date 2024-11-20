@@ -1,0 +1,17 @@
+﻿@page "/craft"
+@using Game.Components.Crafting
+@using Game.Components.Player
+@inject GameState Game
+
+<div>
+    <h3>Crafting</h3>
+    @foreach(var recipe in Game.Player.UnlockedRecipes)
+    {
+        <RecipeSummary Recipe="recipe" />
+    }
+    <ChestSummary />
+</div>
+
+@code {
+
+}

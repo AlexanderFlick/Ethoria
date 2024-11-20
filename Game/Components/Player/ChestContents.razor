@@ -15,15 +15,15 @@
             @foreach (var summary in Summaries)
             {
                 <tr style="padding-bottom:20px;">
-                    <td>@summary.Resource.name</td>
-                    <td>@summary.Resource.value</td>
+                    <td>@summary.Resource.Name</td>
+                    <td>@summary.Resource.Value</td>
                     <td>@summary.Total</td>
                     <td>
-                        <button class="btn btn-primary" style="width:100%">Sell @summary.Resource.name</button>
+                        <button class="btn btn-primary" style="width:100%">Sell @summary.Resource.Name</button>
                     </td>
                     <td>
                         <button class="btn btn-danger" style="width:100%" @onclick="(() => DeleteResource(summary.Resource))">
-                            Delete 1 @summary.Resource.name
+                            Delete 1 @summary.Resource.Name
                         </button>
                     </td>
                 </tr>
@@ -60,7 +60,7 @@
     private void UpdateItemSummaries()
     {
         Summaries = Game.Player.Chest.Contents
-            .GroupBy(resource => resource.name)
+            .GroupBy(resource => resource.Name)
             .Select(group => new ContentSummary
                 {
                     Resource = group.First(),

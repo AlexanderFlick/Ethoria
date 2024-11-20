@@ -17,12 +17,14 @@ public class Player
 {
     public List<Area> UnlockedAreas { get; set; } = [];
     public List<Resource> UnlockedResources { get; set; } = [];
+    public List<Recipe> UnlockedRecipes { get; set; } = [];
     public Chest Chest { get; set; }
 
     public Player()
     {
         UnlockedResources.Add(new Wood());
         UnlockedResources.Add(new Stone());
+        UnlockedRecipes.Add(new Plank([new Wood(), new Wood(), new Wood(), new Wood()]));
         UnlockedAreas.Add(new BeginnerIsland([new Wood()]));
         UnlockedAreas.Add(new Ethoria([new Stone()]));
         Chest = new();
