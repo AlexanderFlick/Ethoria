@@ -1,6 +1,8 @@
 ﻿namespace Game.Models;
 
-public abstract record Area(string name, List<Resource> resources);
+public abstract record Area(string Name, List<Resource> Resources);
 
-public record BeginnerIsland(List<Resource> resources, string name = "Beginner Island") : Area(name, resources);
-public record Ethoria(List<Resource> resources, string name = "Ethoria") : Area(name, resources);
+public record BeginnerIsland(List<Resource> Resources, string Name = "Beginner Island")
+    : Area(Name,   Resources);
+public record Ethoria(List<Resource> Resources, string Name = "Ethoria")
+    : Area(Name, Resources);

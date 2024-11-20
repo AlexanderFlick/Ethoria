@@ -1,0 +1,75 @@
+﻿@using Game.Models
+@inject GameState Game
+
+<div>
+    @if(Game.Player.Chest.Contents.Count > 0)
+    {
+        <table style="width:80%;">
+            <tr>
+                <th>Name</th>
+                <th>Gold Value</th>
+                <th>Total</th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var summary in Summaries)
+            {
+                <tr style="padding-bottom:20px;">
+                    <td>@summary.Resource.name</td>
+                    <td>@summary.Resource.value</td>
+                    <td>@summary.Total</td>
+                    <td>
+                        <button class="btn btn-primary" style="width:100%">Sell @summary.Resource.name</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" style="width:100%" @onclick="(() => DeleteResource(summary.Resource))">
+                            Delete 1 @summary.Resource.name
+                        </button>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+    @if(Game.Player.Chest.Contents.Count < 1)
+    {
+        <div>
+            <p>No items in Chest.</p>
+        </div>
+    }
+    
+</div>
+
+@code {
+    public List<ContentSummary> Summaries { get; set; } = new();
+
+    public int QuantityToDelete { get; set; } = 1;
+
+    protected override void OnInitialized()
+    {
+        Game.OnStateChanged = () =>
+        {
+            UpdateItemSummaries();
+            StateHasChanged();
+        };
+
+        UpdateItemSummaries();
+    }
+
+    private void UpdateItemSummaries()
+    {
+        Summaries = Game.Player.Chest.Contents
+            .GroupBy(resource => resource.name)
+            .Select(group => new ContentSummary
+                {
+                    Resource = group.First(),
+                    Total = group.Count()
+                })
+            .ToList();
+    }
+
+    private void DeleteResource(Resource resource)
+    {
+
+    }
+}

@@ -1,5 +1,6 @@
 ﻿@page "/gather"
 @using Game.Components.Gather
+@using Game.Components.Player
 @inject GameState Game
 
 <div>
@@ -9,6 +10,7 @@
     {
         <GatherResource resource="resource" chest="Game.Player.Chest" />
     }
+    <ChestSummary />
 </div>
 
 @code{

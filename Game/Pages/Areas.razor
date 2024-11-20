@@ -1,0 +1,18 @@
+﻿@page "/areas"
+@using Game.Components.Areas
+@inject GameState Game
+
+<div>
+    <h2>Unlocked Areas</h2>
+    @foreach(var area in Game.Player.UnlockedAreas)
+    {
+        <AreaSummary Area="area" />
+    }
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        Game.OnStateChanged = StateHasChanged;
+    }
+}

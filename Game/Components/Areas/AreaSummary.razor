@@ -1,0 +1,32 @@
+﻿@using Game.Models
+@using Game.Services
+@inject IAreaService AreaService
+@inject GameState Game
+
+<div class="card" style="text-align:center; padding:20px; width:400px; margin-top:40px;">
+    <p>@Area.Name</p>
+    @if(AlreadyVisited)
+    {
+        <p>You have already visited!</p>
+    }
+    <button class="btn btn-primary" disabled="@AlreadyVisited" @onclick="() => UnlockArea()">Travel</button>
+</div>
+
+@code {
+    [Parameter]
+    public Area? Area { get; set; }
+
+    private bool AlreadyVisited { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (Game.Player.UnlockedAreas.Contains(Area))
+            AlreadyVisited = true;
+    }
+
+    private void UnlockArea()
+    {
+        AreaService.Unlock(Game.Player.UnlockedAreas, Game.Player.UnlockedResources, Area);
+        Game.OnStateChanged();
+    }
+}

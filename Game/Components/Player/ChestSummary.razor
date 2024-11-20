@@ -1,0 +1,11 @@
+﻿@inject GameState Game
+
+<div class="card" style="padding:20px; margin-top:40px; text-align:center;">
+    <h4>Chest</h4>
+    <p>@Game.Player.Chest.Contents.Count/@Game.Player.Chest.ItemMax Max Resources</p>
+    <ChestContents />
+</div>
+
+@code {
+
+}
